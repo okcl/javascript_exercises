@@ -1,11 +1,9 @@
-let arr = [1,2,3,4];
-
-let obj = {
-    "key": 1,
-    "key2": 2
+function sum(...numbers){
+    let result = 0;
+    for(let number of numbers){
+        result += number;
+    }
+    return result;
 }
 
-console.log(Object.entries(obj))
-for (let entry in Object.entries(obj)){
-    console.log(entry)
-}
+console.log(sum(3,3,3));
