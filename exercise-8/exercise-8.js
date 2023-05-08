@@ -2,10 +2,9 @@ function multiplyByTwo(value) {
   let number = 2;
   
   function inner(){
-    number *= value;
-    console.log(number);
+    return number *= value;
   }
-  inner()
+  return inner;
 }
 
-multiplyByTwo(5);
+console.log(multiplyByTwo(5)());

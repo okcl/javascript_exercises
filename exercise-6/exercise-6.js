@@ -1,8 +1,8 @@
 function printName() {
     const helloName = "Hello John";
         function inner(){
-            console.log(helloName);
+            return helloName;
         }
-    inner();
+    return inner();
 }
-printName();
+console.log(printName());
