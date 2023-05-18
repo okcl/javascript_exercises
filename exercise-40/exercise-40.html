@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <div id="container" style="display: flex; align-items: center;">
+      <ul class="todo-list"></ul>
+    </div>
+  </body>
+</html>
+
+<script>
+  const API = 'https://jsonplaceholder.typicode.com/todos';
+
+  function setData(data) {
+        const todoList = document.querySelector('.todo-list');
+
+        data.forEach(todo => {
+          const li = document.createElement('li');
+          li.textContent = todo.title;
+          todoList.appendChild(li);
+        });
+  }
+
+  async function fetchData(){
+    try {
+      const res = await fetch(API);
+      const json = await res.json();
+      setData(json);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  fetchData();
+</script>

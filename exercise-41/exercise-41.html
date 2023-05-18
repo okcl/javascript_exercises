@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="container" style="display: flex; align-items: center;">
+      <h2 id="todoTitle"></h2>
+      <input type="checkbox" name="" id="isCompleted">
+    </div>
+
+    <script>
+      const API = 'https://jsonplaceholder.typicode.com/todos/4';
+
+      function setData(data) {
+        let title = document.getElementById("todoTitle");
+        title.textContent = data.title;
+        let completed = document.getElementById("isCompleted");
+        completed.checked = data.completed;
+      }
+
+      async function fetchData() {
+        try {
+          const res = await fetch(API);
+          const json = await res.json();
+          let data = {
+            title: json.title,
+            completed: json.completed
+          };
+          setData(data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

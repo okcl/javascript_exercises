@@ -1,0 +1,51 @@
+<html>
+  <body>
+    <div id="container">
+      <form>
+        <div>
+          <label>Title</label>
+          <input type="text" id="todo-title" />
+        </div>
+        <div>
+          <label>Completed</label>
+          <input type="checkbox" id="todo-completed" />
+        </div>
+
+        <button type="submit" id="submit-todo">Send</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  const API = 'https://jsonplaceholder.typicode.com/posts';
+  const button = document.getElementById('submit-todo');
+  
+  button.addEventListener('click', async function (event) {
+    event.preventDefault(); // Prevent the form submission from reloading the page
+
+    const title = document.getElementById('todo-title').value;
+    const completed = document.getElementById('todo-completed').checked;
+
+    const postData = {
+      title: title,
+      completed: completed,
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    };
+      
+    try {
+      const response = await fetch(API, options);
+      const data = await response.json();
+      console.log('New task created:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+</script>

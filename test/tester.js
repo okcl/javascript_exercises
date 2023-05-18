@@ -1,36 +1,17 @@
-const isLogged = true;
+function setImageSrc(data){
+    let title = document.getElementById("title");
+    title.src = data.title;
+    let title = document.getElementById("title");
+}
 
-const isTrue = (isLogged) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const randomNumber = Math.random();
-            if (isLogged) {
-                resolve(randomNumber);
-            } else {
-                reject(new Error("An error occurred."));
-            }
-        }, 100);
-    });
-};
-
-const isGreater = (number) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (number > 0.5) {
-                resolve({ name: "John", age: 24 });
-            } else {
-                reject(new Error(`${number} is not greater than 0.5.`));
-            }
-        }, 100);
-    });
-};
-
-isTrue(isLogged)
-    .then(randomNumber => isGreater(randomNumber))
-    .then(data => console.log(data))
-    .catch(error => console.error(error.message))
-    .finally(() => {
-        setTimeout(() => {
-          console.log('Process completed.');
-        }, 1000);
-      });
+fetch("https://dog.ceo/api/breeds/image/random")
+    .then((res) => res.json())
+    .then((json) => {
+        let data = {
+            title: json.title,
+            completed: json.completed
+        };
+        return data;
+    })
+    .then(setImageSrc)
+    .catch((err) => console.error(err))
